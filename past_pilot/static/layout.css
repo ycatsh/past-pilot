@@ -1,0 +1,180 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fafafa; 
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+}
+
+header {
+    justify-content: space-between;
+    background-color: #2a5172;
+    padding: 0px 5%;
+}
+
+legend {
+    margin-top: 2%;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-link-left, .nav-link-center {
+    list-style: none;
+}
+
+.nav-link-center {
+    margin-left: 2%;
+}
+
+.nav-link-left li, .nav-link-right li, .nav-link-center li {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0px 20px;
+    margin-top: 20px;
+}
+
+.nav-link-left li a, .nav-link-right li a, .nav-link-center li a{
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+    color: #428bca;
+}
+
+.profile-idea-title a:hover, h6:hover{
+    text-decoration: none;
+    color: #428bca;
+}
+
+.alert {
+    margin-top: 2%;
+    margin-left: 25%;
+    margin-right: -25%;
+}
+
+.content-section {
+    margin-left: 24.5%;
+    margin-right: -27%;
+    justify-content: center;
+    margin-top: 5%;
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.posts-content-section {
+    margin-left: 4%;
+    margin-right: -47.5%;
+    justify-content: center;
+    margin-top: 20%;
+    padding: 10px 20px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.content-section-collab-pf {
+    margin-left: 1%;
+    margin-right: 2%;
+    justify-content: center;
+    margin-top: 5%;
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.ideas-page-title h4{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 55%;
+}
+
+.idea-page-title h4{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 65%;
+}
+
+.requests-page-title h4{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 61%;
+}
+
+.need-page-title h4{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 60%;
+}
+
+.inis-page-title h4{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 62%;
+}
+
+.ini-page-title h4{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 62%;
+}
+
+.bottom-text {
+    margin-left: 25.5%;
+    margin-right: -25%;
+}
+
+.article-title {
+    font-size: 24px;
+    text-decoration: none;
+    color: #444444;
+}
+
+a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+}
+
+.article-content {
+    white-space: pre-line;
+}
+
+.article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+}
+
+
+.article-metadata a:hover {
+    color: #ce2323;
+    text-decoration: none;
+}
+
+.btn {
+    margin-top: 2%;
+    margin-bottom: 3%;
+    border: none;
+    background-color: #428bca;
+}
+
+
