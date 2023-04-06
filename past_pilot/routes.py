@@ -1,11 +1,13 @@
 from flask_login import login_user, current_user, logout_user, login_required
+from past_pilot.forms import SignInForm, SignUpForm, QuestionForm, KeyForm
 from flask import render_template, url_for, flash, redirect, request
-from past_pilot.forms import SignInForm, SignUpForm, QuestionForm
 from past_pilot.similarity import calculate_similarity
-from past_pilot.pdf_converter import converter
 from past_pilot.key_generator import generate_key
+from past_pilot.pdf_converter import converter
+from past_pilot.directory_modifier import *
 from past_pilot import app, db, bcrypt
 from past_pilot.models import User
+import os
 
 
 @app.route('/question')
@@ -24,9 +26,33 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/resources')
+@app.route('/resources', methods=['POST', 'GET'])
 def resources():
-    return render_template('resources.html')
+    form = KeyForm()
+
+    try:
+        auth_make_dir(current_user, current_user.key)
+    except FileExistsError:
+        pass
+
+    owned_length = len(own_dir_searcher(current_user, 0))
+    owned_names = own_dir_searcher(current_user, 0)
+    owned_urls = own_dir_searcher(current_user, 1)
+    
+    if form.validate_on_submit():
+        keys = form.keys.data.split(',')
+        list_dirs = fetch_dir(keys)
+
+        lengths = len(dir_searcher(list_dirs, 0))
+        names = dir_searcher(list_dirs, 0,)
+        urls = dir_searcher(list_dirs, 1)
+
+        return render_template('resources.html', form=form, 
+                               names=names, urls=urls, lengths=lengths,
+                               name=owned_names, url=owned_urls, length=owned_length)
+
+    return render_template('resources.html', form=form, length=owned_length, name=owned_names, url=owned_urls, lengths=0)
+
 
 
 @app.route('/signup', methods=['POST', 'GET'])
