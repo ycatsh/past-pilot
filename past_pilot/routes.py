@@ -1,6 +1,6 @@
 from flask_login import login_user, current_user, logout_user, login_required
 from past_pilot.forms import SignInForm, SignUpForm, QuestionForm, KeyForm
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, send_file
 from past_pilot.similarity import calculate_similarity
 from past_pilot.key_generator import generate_key
 from past_pilot.pdf_converter import converter
@@ -30,29 +30,69 @@ def about():
 def resources():
     form = KeyForm()
 
-    try:
-        auth_make_dir(current_user, current_user.key)
-    except FileExistsError:
-        pass
+    if not current_user.is_authenticated:
+        return render_template('login_req.html')
+    else:
 
-    owned_length = len(own_dir_searcher(current_user, 0))
-    owned_names = own_dir_searcher(current_user, 0)
-    owned_urls = own_dir_searcher(current_user, 1)
-    
-    if form.validate_on_submit():
-        keys = form.keys.data.split(',')
-        list_dirs = fetch_dir(keys)
+        try:
+            auth_make_dir(current_user, current_user.key)
+        except FileExistsError:
+            pass
 
-        lengths = len(dir_searcher(list_dirs, 0))
-        names = dir_searcher(list_dirs, 0,)
-        urls = dir_searcher(list_dirs, 1)
+        # owned_length = len(own_dir_searcher(current_user, 0))
+        # owned_names = own_dir_searcher(current_user, 0)
+        # owned_urls = own_dir_searcher(current_user, 1)
 
-        return render_template('resources.html', form=form, 
-                               names=names, urls=urls, lengths=lengths,
-                               name=owned_names, url=owned_urls, length=owned_length)
+        if current_user.is_authenticated:
+            directory_path = os.path.join(get_data_dir(), current_user.key)
+        
+        files = os.listdir(directory_path)
+        action = request.form.get('action', 'view')
 
-    return render_template('resources.html', form=form, length=owned_length, name=owned_names, url=owned_urls, lengths=0)
+        if action == 'delete':
+            filename = request.form['filename']
+            file_path = os.path.join(directory_path, filename)
 
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+                flash(f'File "{filename}" was deleted successfully', 'success')
+            else:
+                flash(f'File "{filename}" not found', 'danger')
+
+        elif action == 'upload':
+            new_file = request.files['file']
+
+            if new_file and new_file.filename.endswith('.pdf'):
+                new_file.save(os.path.join(directory_path, new_file.filename))
+                flash(f'File "{new_file.filename}" was uploaded successfully', 'success')
+            else:
+                flash('Only PDF files are allowed', 'danger')
+
+        if form.validate_on_submit():
+            keys = form.keys.data.split(',')
+            list_dirs = fetch_dir(keys)
+
+            lengths = len(dir_searcher(list_dirs, 0))
+            names = dir_searcher(list_dirs, 0,)
+            urls = dir_searcher(list_dirs, 1)
+
+            return render_template('resources.html', form=form, 
+                                names=names, urls=urls, 
+                                lengths=lengths,files=files)
+
+    return render_template('resources.html', form=form, 
+                           lengths=0, files=files)
+
+
+@app.route('/download/<filename>')
+def download_file(filename):
+    directory_path = os.path.join(get_data_dir(), current_user.key)
+    file_path = os.path.join(directory_path, filename)
+
+    if os.path.isfile(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        return 'File not found', 404
 
 
 @app.route('/signup', methods=['POST', 'GET'])
