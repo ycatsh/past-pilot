@@ -41,4 +41,8 @@ class QuestionForm(FlaskForm):
     board = StringField('Enter your board', validators=[DataRequired()])
     subject = StringField('Enter the subject', validators=[DataRequired()])
     submit = SubmitField('Find')
-    
+
+
+class KeyForm(FlaskForm):
+    keys = StringField('Separate keys with a comma', validators=[DataRequired()])
+    submit = SubmitField('Access')
