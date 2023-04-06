@@ -1,6 +1,6 @@
 from flask_login import login_user, current_user, logout_user, login_required
 from past_pilot.forms import SignInForm, SignUpForm, QuestionForm, KeyForm
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, send_file
 from past_pilot.similarity import calculate_similarity
 from past_pilot.key_generator import generate_key
 from past_pilot.pdf_converter import converter
@@ -39,6 +39,36 @@ def resources():
     owned_names = own_dir_searcher(current_user, 0)
     owned_urls = own_dir_searcher(current_user, 1)
     
+    if current_user.is_authenticated:
+        directory_path = os.path.join(get_data_dir(), current_user.key)
+
+    files = os.listdir(directory_path)
+
+    action = request.form.get('action', 'view')
+
+    if action == 'delete':
+        filename = request.form['filename']
+
+        file_path = os.path.join(directory_path, filename)
+        print(file_path)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+
+            flash(f'File "{filename}" was deleted successfully.', 'success')
+        else:
+            flash(f'File "{filename}" not found.', 'error')
+
+    elif action == 'upload':
+        file = request.files['file']
+
+        if file and file.filename.endswith('.pdf'):
+            file.save(os.path.join(directory_path, file.filename))
+
+            flash(f'File "{file.filename}" was uploaded successfully.', 'success')
+        else:
+            flash('Only PDF files are allowed.', 'error')
+
+
     if form.validate_on_submit():
         keys = form.keys.data.split(',')
         list_dirs = fetch_dir(keys)
@@ -49,11 +79,19 @@ def resources():
 
         return render_template('resources.html', form=form, 
                                names=names, urls=urls, lengths=lengths,
-                               name=owned_names, url=owned_urls, length=owned_length)
+                               name=owned_names, url=owned_urls, length=owned_length, files=files)
 
-    return render_template('resources.html', form=form, length=owned_length, name=owned_names, url=owned_urls, lengths=0)
+    return render_template('resources.html', form=form, length=owned_length, name=owned_names, url=owned_urls, lengths=0, files=files)
 
+@app.route('/download/<filename>')
+def download_file(filename):
+    directory_path = os.path.join(get_data_dir(), current_user.key)
+    file_path = os.path.join(directory_path, filename)
 
+    if os.path.isfile(file_path):
+        return send_file(file_path, as_attachment=True)
+    else:
+        return 'File not found', 404
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
