@@ -3,7 +3,7 @@ from flask import render_template, url_for, flash, redirect, request
 from past_pilot.forms import SignInForm, SignUpForm, QuestionForm
 from past_pilot.similarity import calculate_similarity
 from past_pilot.pdf_converter import converter
-from past_pilot.key import generate_key
+from past_pilot.key_generator import generate_key
 from past_pilot import app, db, bcrypt
 from past_pilot.models import User
 
