@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
 
 header {
     justify-content: space-between;
-    background-color: #2a5172;
+    background-color: #333333;
     padding: 0px 5%;
 }
 
@@ -52,12 +52,15 @@ legend {
     text-decoration: none;
 }
 
-a{
-    text-decoration: none;
-    color: #428bca;
+.nav-container a{
+    transition: all 0.3s ease;
 }
 
-.profile-idea-title a:hover, h6:hover{
+.nav-container a:hover{
+    color: #5e6266;
+}
+
+a{
     text-decoration: none;
     color: #428bca;
 }
@@ -69,112 +72,39 @@ a{
 }
 
 .content-section {
-    margin-left: 24.5%;
-    margin-right: -27%;
-    justify-content: center;
-    margin-top: 5%;
-    background: #ffffff;
     padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
+    margin-top: 5%;
     margin-bottom: 20px;
 }
 
-.posts-content-section {
-    margin-left: 4%;
-    margin-right: -47.5%;
-    justify-content: center;
-    margin-top: 20%;
-    padding: 10px 20px;
-    border-radius: 3px;
-    margin-bottom: 20px;
+#gen-btn{
+    margin-left: 2%;
 }
 
-.content-section-collab-pf {
-    margin-left: 1%;
-    margin-right: 2%;
-    justify-content: center;
-    margin-top: 5%;
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
+.form-group{
+    margin-top: 2%;
 }
 
-.ideas-page-title h4{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 55%;
+.form-check{
+    margin-top: 1%;
 }
 
-.idea-page-title h4{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 65%;
-}
-
-.requests-page-title h4{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 61%;
-}
-
-.need-page-title h4{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 60%;
-}
-
-.inis-page-title h4{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 62%;
-}
-
-.ini-page-title h4{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    margin-left: 62%;
+.text-muted{
+    font-size: 14px;
 }
 
 .bottom-text {
-    margin-left: 25.5%;
-    margin-right: -25%;
+    font-size: 14px;
+    margin-top: -4%;
+    margin-left: 2.2%;
 }
 
-.article-title {
-    font-size: 24px;
-    text-decoration: none;
-    color: #444444;
-}
-
-a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-}
-
-.article-content {
-    white-space: pre-line;
-}
-
-.article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-}
-
-
-.article-metadata a:hover {
-    color: #ce2323;
-    text-decoration: none;
-}
 
 .btn {
-    margin-top: 2%;
     margin-bottom: 3%;
     border: none;
-    background-color: #428bca;
+    background-color: #333333;
 }
+
 
 
