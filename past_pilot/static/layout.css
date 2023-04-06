@@ -115,10 +115,37 @@ a{
     background-color: #333333;
 }
 
+#access-btn{
+    margin-top: -1%;
+}
+
+#upload-btn{
+    margin-top: 2%;
+}
+
 .pdf-list{
     margin-top: 1.5%;
     margin-left: 2%;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+}
+
+td form{
+    display: inline;
+}
+
+#upload-section{
+    margin-top: 2%;
+}
+
 
 
 

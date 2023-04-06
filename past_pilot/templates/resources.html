@@ -1,86 +1,73 @@
 {% extends "layout.html" %}
 {% block content %}
-<head><link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pdf_modify.css') }}"></head>
-<h1>View Files</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Filename</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for file in files %}
+<div class="content-section">
+    <legend class="border-bottom mb-4">Your PDF files:</legend>
+    <table>
+        <thead>
             <tr>
-                <td>{{ file }}</td>
-                <td>
-                    <form action="{{ url_for('resources') }}" method="post">
-                        <input type="hidden" name="filename" value="{{ file }}">
-                        <input type="hidden" name="action" value="delete">
-                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ file }}?')">Delete</button>
-                    </form>
-                    <form action="{{ url_for('download_file', filename=file) }}" method="get">
-                        <input type="hidden" name="action" value="download">
-                        <button type="submit">Download</button>
-                    </form>
-                </td>
+                <th>Filename</th>
+                <th>Action</th>
             </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for file in files %}
+                <tr>
+                    <td>{{ file }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('resources') }}">
+                            <input type="hidden" name="filename" value="{{ file }}">
+                            <input type="hidden" name="action" value="delete">
+                            <button class="btn btn-primary btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete {{ file }}?')">Delete</button>
+                        </form>
+                        <form method="GET" action="{{ url_for('download_file', filename=file) }}">
+                            <input type="hidden" name="action" value="download">
+                            <button class="btn btn-primary btn-sm" type="submit">Download</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-<h2>Upload PDF File</h2>
+    <legend class="border-bottom mb-4">Upload PDF files:</legend>
 
-<form action="{{ url_for('resources') }}" method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <input type="hidden" name="action" value="upload">
-    <button type="submit">Upload</button>
-</form>
-    <div class="content-section">
-        <form method="POST" action="">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                
-                <!-- <legend class="border-bottom mb-4">Your uploaded PDF files</legend>
+    <form method="POST" action="{{ url_for('resources') }}" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="hidden" name="action" value="upload">
+        <button class="btn btn-primary btn-sm" type="submit" id="upload-btn">Upload</button>
+    </form>
 
-                <div class="form-group" id="own-list">
-                    {% for file in range(length) %}
-                        <div class="pdf-list">
-                            <span><img src="{{ url_for('static', filename='logos/own-pdf-icon.png') }}" width="32" height="32"><a href="{{ url[file] }}">{{ name[file][:-4] }}</a></span>
-                            <br>
-                        </div>
-                    {% endfor %}    
-                </div> -->
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Enter keys for which you want access:</legend>
 
+            <div class="form-group">
+                {{ form.keys.label(class="form-control-label") }}
+                {% if form.keys.errors %}
+                    {{ form.keys(class="form-control form-control-sm is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.keys.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.keys(class="form-control form-control-sm") }}
+                {% endif %}
+            </div>
 
-                <legend class="border-bottom mb-4">Enter keys for which you want access:</legend>
+            <div class="form-group" id="key-list">
+                {% for file in range(lengths) %}
+                    <div class="pdf-list">
+                        <span><img src="{{ url_for('static', filename='logos/pdf-icon.png') }}" width="32" height="32"><a href="{{ urls[file] }}">{{ names[file][:-4] }}</a></span>
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>  
 
-                <div class="form-group">
-                    {{ form.keys.label(class="form-control-label") }}
-                    {% if form.keys.errors %}
-                        {{ form.keys(class="form-control form-control-sm is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.keys.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.keys(class="form-control form-control-sm") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group" id="key-list">
-                    {% for file in range(lengths) %}
-                        <div class="pdf-list">
-                            <span><img src="{{ url_for('static', filename='logos/pdf-icon.png') }}" width="32" height="32"><a href="{{ urls[file] }}">{{ names[file][:-4] }}</a></span>
-                            <br>
-                        </div>
-                    {% endfor %}
-                </div>  
-
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-primary btn-sm") }}
-                </div>
-            </fieldset>
+            <div class="form-group" id="access-btn">
+                {{ form.submit(class="btn btn-primary btn-sm") }}
+            </div>
+        </fieldset>
 
 {% endblock content %}
