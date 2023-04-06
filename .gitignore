@@ -4,6 +4,11 @@
 ### dotenv ###
 .env
 
+### user ###
+data/
+data/user
+data/user/images
+
 ### Flask ###
 instance/*
 !instance/.gitignore
