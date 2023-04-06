@@ -85,6 +85,15 @@ a{
     margin-top: 2%;
 }
 
+#own-list {
+    margin-bottom: 5%;
+}
+
+#key-list {
+    margin-top: 2.5%;
+    margin-bottom: 3%;
+}
+
 .form-check{
     margin-top: 1%;
 }
@@ -104,6 +113,11 @@ a{
     margin-bottom: 3%;
     border: none;
     background-color: #333333;
+}
+
+.pdf-list{
+    margin-top: 1.5%;
+    margin-left: 2%;
 }
 
 

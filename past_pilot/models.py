@@ -14,5 +14,5 @@ class User(db.Model, UserMixin):
     key = db.Column(db.String(6), unique=True, nullable=False)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.key}')"
+        return f"User('{self.key}', '{self.username}', '{self.email}')"
 

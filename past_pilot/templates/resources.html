@@ -1,4 +1,50 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Resources Page</h1>
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                
+                <legend class="border-bottom mb-4">Your uploaded PDF files</legend>
+
+                <div class="form-group" id="own-list">
+                    {% for file in range(length) %}
+                        <div class="pdf-list">
+                            <span><img src="{{ url_for('static', filename='logos/own-pdf-icon.png') }}" width="32" height="32"><a href="{{ url[file] }}">{{ name[file][:-4] }}</a></span>
+                            <br>
+                        </div>
+                    {% endfor %}    
+                </div>
+
+
+                <legend class="border-bottom mb-4">Enter keys for which you want access:</legend>
+
+                <div class="form-group">
+                    {{ form.keys.label(class="form-control-label") }}
+                    {% if form.keys.errors %}
+                        {{ form.keys(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.keys.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.keys(class="form-control form-control-sm") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" id="key-list">
+                    {% for file in range(lengths) %}
+                        <div class="pdf-list">
+                            <span><img src="{{ url_for('static', filename='logos/pdf-icon.png') }}" width="32" height="32"><a href="{{ urls[file] }}">{{ names[file][:-4] }}</a></span>
+                            <br>
+                        </div>
+                    {% endfor %}
+                </div>  
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary btn-sm") }}
+                </div>
+            </fieldset>
+
 {% endblock content %}
