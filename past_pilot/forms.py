@@ -10,8 +10,7 @@ class SignUpForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=32)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    school = StringField('Your School', validators=[DataRequired(), Length(min=4, max=16)])
-    key = StringField('Enter secret school key', validators=[DataRequired(), Length(min=4, max=32)])
+    key = StringField('Generated Secret Key', validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):
@@ -23,7 +22,12 @@ class SignUpForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is already in use')
-
+        
+    def validate_key(self, key):
+        user = User.query.filter_by(key=key.data).first()
+        if user:
+            raise ValidationError('That key is already in use, please generate another one')
+        
 
 class SignInForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])

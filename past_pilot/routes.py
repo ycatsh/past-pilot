@@ -3,6 +3,7 @@ from flask import render_template, url_for, flash, redirect, request
 from past_pilot.forms import SignInForm, SignUpForm, QuestionForm
 from past_pilot.similarity import calculate_similarity
 from past_pilot.pdf_converter import converter
+from past_pilot.key import generate_key
 from past_pilot import app, db, bcrypt
 from past_pilot.models import User
 
@@ -34,18 +35,20 @@ def signup():
         return redirect(url_for('index'))
 
     form = SignUpForm()
-
+    key = generate_key()
+    
     if form.validate_on_submit():
 
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password, school=form.school.data, key=form.key.data)
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password, key=form.key.data)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created', 'success')
 
         return redirect(url_for('signin'))
 
-    return render_template('signup.html', title='Sign Up', form=form)
+
+    return render_template('signup.html', title='Sign Up', form=form, key=key)
 
 
 @app.route('/signin', methods=['POST', 'GET'])
@@ -77,7 +80,6 @@ def signout():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    
     return render_template('profile.html')
 
 
