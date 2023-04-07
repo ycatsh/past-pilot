@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
 
 header {
     justify-content: space-between;
-    background-color: #333333;
+    background-color: #35383a;
     padding: 0px 5%;
 }
 
@@ -77,6 +77,7 @@ a{
     margin-bottom: 20px;
 }
 
+
 #gen-btn{
     margin-left: 2%;
 }
@@ -112,7 +113,7 @@ a{
 .btn {
     margin-bottom: 3%;
     border: none;
-    background-color: #333333;
+    background-color: #35383a;
 }
 
 #access-btn{
