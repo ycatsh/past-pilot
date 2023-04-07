@@ -2,7 +2,7 @@ import os
 import PyPDF2
 from sentence_transformers import SentenceTransformer, util
 from pathlib import Path
-from directory_modifier import get_data_dir
+from past_pilot.directory_modifier import get_data_dir
 model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L6-v2')
 
 # directory parameter refers to the folder containing all pdfs for a key
@@ -26,7 +26,7 @@ def calculate_similarity(user_input, data):
 def chunks_similarity(user_input, chunks):
     similarity_scores = []
     for chunk in chunks:
-        sim = calculate_similarity(user_input, chunk[1])
+        sim = calculate_similarity(user_input, chunk[2])
         similarity_scores.append((chunk, sim))
     return similarity_scores
 
