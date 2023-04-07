@@ -146,6 +146,20 @@ td form{
     margin-top: 2%;
 }
 
+.creators .links{
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 18px;
+}
+
+.creators{
+    margin-top: -2%;
+}
+
+.container{
+    padding-right: 70px;
+}
+
 
 
 
