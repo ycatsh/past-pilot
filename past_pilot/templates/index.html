@@ -23,30 +23,16 @@
                 </div>
 
                 <div class="form-group">
-                    {{ form.board.label(class="form-control-label") }}
-                    {% if form.board.errors %}
-                        {{ form.board(class="form-control form-control-lg is-invalid") }}
+                    {{ form.keys.label(class="form-control-label") }}
+                    {% if form.keys.errors %}
+                        {{ form.keys(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.board.errors %}
+                            {% for error in form.keys.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.board(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-
-                <div class="form-group">
-                    {{ form.subject.label(class="form-control-label") }}
-                    {% if form.subject.errors %}
-                        {{ form.subject(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.subject.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.subject(class="form-control form-control-lg") }}
+                        {{ form.keys(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
             </fieldset>
@@ -55,5 +41,24 @@
                 {{ form.submit(class="btn btn-primary btn-sm") }}
             </div>
         </form>
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>PDF Path</th>
+                    <th>Page Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pdf in pdfs %}
+                <tr>
+                    <td><a href="{{ pdf[0] }}#page={{ pdf[1] }}">{{ pdf[0] }}</a></td>
+                    <td>{{ pdf[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock content %}
