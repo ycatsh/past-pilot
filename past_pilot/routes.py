@@ -116,7 +116,7 @@ def signup():
     form = SignUpForm()
     key = generate_key()
                                                     
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
                                                 
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, email=form.email.data, password=hashed_password, key=form.key.data)
@@ -137,7 +137,7 @@ def signin():
                                                 
     form = SignInForm()
                                                 
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
