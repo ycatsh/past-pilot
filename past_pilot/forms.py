@@ -17,18 +17,18 @@ class SignUpForm(FlaskForm):
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('That username is taken')
-
+                                                
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('That email is already in use')
-        
+                                                        
     def validate_key(self, key):
         user = User.query.filter_by(key=key.data).first()
         if user:
             raise ValidationError('That key is already in use, please generate another one')
-        
-
+                                                        
+                                                
 class SignInForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -38,8 +38,7 @@ class SignInForm(FlaskForm):
 
 class QuestionForm(FlaskForm):
     question = TextAreaField('Enter a question', validators=[DataRequired()])
-    board = StringField('Enter your board', validators=[DataRequired()])
-    subject = StringField('Enter the subject', validators=[DataRequired()])
+    keys = StringField('Separate keys with a comma', validators=[DataRequired()])
     submit = SubmitField('Find')
 
 
