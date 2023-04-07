@@ -93,7 +93,7 @@ def resources():
                                 names=names, urls=urls, 
                                 lengths=lengths,files=files)
                                                 
-    return render_template('resources.html', form=form, 
+        return render_template('resources.html', form=form, 
                            lengths=0, files=files)
                                                 
                                                 
