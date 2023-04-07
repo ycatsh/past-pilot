@@ -1,5 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
-<br>
-<h1>About Page</h1>
+<div class="container">
+    <br>
+    <br>
+    <h2>About Us</h2>
+    <p>
+    <br>
+    Hello and welcome to our website! We're here to help you take control of your academic journey 
+    with ease and convenience. Our platform is powered by some really cool NLP tech that lets you manage all your 
+    school resources and past papers like a boss! That means no more hunting around for hours on end trying to find 
+    what you need. With us, everything you need is right at your fingertips.
+    <br>
+    <br>
+    Our platform is also the perfect place to collaborate with other students. You can browse and access 
+    a wide range of resources that have been uploaded by other users via user specific <a href="{{ url_for('signup')}}">secret keys</a>. So, if you're ever in need of some extra help 
+    or inspiration, you can always turn to our community.
+    <br>
+    <br>
+    And the best part? Our text similarity feature makes it super easy to find specific questions through uploaded 
+    past papers. So you can spend less time sifting through irrelevant information and more time mastering the topics 
+    that matter.
+    <br>
+    <br>
+    We're passionate about helping you achieve your academic goals, and we believe that our platform is the perfect 
+    tool to help you get there. So why not <a href="{{ url_for('signup')}}">join us today?</a> You won't regret it!
+    </p>
+    <br>
+
+    <h2>Creators</h2>
+    <div class="creators">
+        <br>
+        <div class="links">
+        Yash Goyal <a href="github.com/ycatsh"><img src="{{ url_for('static', filename='logos/github-icon.svg')}}"></a> <a href="https://www.linkedin.com/in/ysgoyal/"><img src="{{ url_for('static', filename='logos/linkedin-icon.svg')}}" width="24" height="24"></a>
+        <br>
+        Samatva Kasat <a href="github.com/samkas125"><img src="{{ url_for('static', filename='logos/github-icon.svg')}}"></a> <a href="https://www.linkedin.com/in/samatva/"><img src="{{ url_for('static', filename='logos/linkedin-icon.svg')}}" width="24" height="24"></a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
