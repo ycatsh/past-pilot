@@ -1,8 +1,9 @@
-import os
-import PyPDF2
 from sentence_transformers import SentenceTransformer, util
-from pathlib import Path
 from past_pilot.directory_modifier import get_data_dir
+from pathlib import Path
+import PyPDF2
+import os
+
 model = SentenceTransformer('sentence-transformers/paraphrase-MiniLM-L6-v2')
 
 # directory parameter refers to the folder containing all pdfs for a key
@@ -16,19 +17,25 @@ def get_chunks(directory):
             page = pdf_reader.pages[page_num]
             text = page.extract_text()
             chunks.append((pdf_file.resolve(), page_num, text))
-        return chunks
+
+    return chunks
+
 
 def calculate_similarity(user_input, data):
     embeddings = model.encode([user_input, data], convert_to_tensor=True)
     sim = util.cos_sim(embeddings[0], embeddings[1]).item()
+
     return sim
+
 
 def chunks_similarity(user_input, chunks):
     similarity_scores = []
     for chunk in chunks:
         sim = calculate_similarity(user_input, chunk[2])
-        similarity_scores.append((chunk, sim))
+        similarity_scores.append(((chunk[0], chunk[1]), sim))
+
     return similarity_scores
+
 
 def get_similar(user_input, keys):
     directory = get_data_dir()
@@ -38,4 +45,5 @@ def get_similar(user_input, keys):
         chunks = get_chunks(key_dir)
         sim_scores.extend(chunks_similarity(user_input, chunks))
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
     return sim_scores
