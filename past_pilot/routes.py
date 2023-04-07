@@ -18,7 +18,7 @@ def index():
         keys = form.keys.data.replace(' ', '').split(',')
         arr = get_similar(form.question.data, keys)
 
-        pdfs = [[os.path.relpath(arr[i][0][0], os.path.abspath(os.path.dirname(__file__))), arr[i][0][1]+1] for i in range(3)]
+        pdfs = [[os.path.relpath(arr[i][0][0], os.path.abspath(os.path.dirname(__file__))), arr[i][0][1]+1] for i in range(5)]
 
         return render_template('index.html', form=form, pdfs=pdfs)
     
@@ -160,7 +160,30 @@ def signout():
 @login_required
 def profile():
     return render_template('profile.html', current_user=current_user)
-                                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
 
                                                 
 
