@@ -9,7 +9,7 @@ An Ed-tech platform for managing academic resources like past papers, with priva
 
 ## End-User Flow Chart
 ```mermaid
-flowchart TD
+graph TD
     s([Start])-->ut{User Type}
     ut --> rec1(Signed Out)
     ut --> rec2(Signed In)
