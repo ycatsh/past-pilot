@@ -1,5 +1,5 @@
 # Past Pilot
-An Ed-tech platform for managing academic resources like past papers, with private key-based storage and NLP integration for easy search for similar or specific questions. Made in collaboration with [Yash Goyal](https://github.com/ycatsh).
+An Ed-tech platform for managing academic resources like past papers, with private key-based storage and NLP integration for easy search for similar or specific questions. Made in collaboration with [Samatva Kasat](https://github.com/samkas125).
 
 ## Functionality
 - Past Pilot is a web app that allows users to upload, download, and share academic resources, such as past papers.
