@@ -2,7 +2,6 @@ from flask import render_template, url_for, flash, redirect, request, send_file,
 from flask_login import login_user, current_user, logout_user, login_required
 from past_pilot.forms import SignInForm, SignUpForm, QuestionForm, KeyForm
 from past_pilot.key_generator import generate_key
-from past_pilot.pdf_converter import converter
 from past_pilot.directory_modifier import *
 from past_pilot import app, db, bcrypt
 from past_pilot.similarity import *
