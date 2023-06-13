@@ -13,6 +13,8 @@ An Ed-tech platform for managing academic resources like past papers, with priva
 - It enables users to find similar types of questions and scan through their friends' resources. 
 - We used [sentence-transformers](https://www.sbert.net/) to calculate text similarity between the user inputs and resources.
 
-## Collaborators
+<br>  
+<br>  
 
+## Collaborators
 Past Pilot is a collaborative project by Yash Goyal and [Samatva Kasat](https://github.com/samkas125)
